@@ -11,9 +11,9 @@ body {
 
 .chat-container {
   width: 480px;
-  height: 600px;
+  height: 100vh;
   background: #151516;
-  border-radius: 12px;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
 }
@@ -30,8 +30,8 @@ body {
 
 .messages-area {
   flex: 1;
-  padding: 16px;
   overflow-y: auto;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -62,7 +62,7 @@ body {
 
 .action {
   opacity: 0.45;
-  margin-top: 4px;
+  margin-top: 2px;
   display: block;
 }
 
@@ -108,7 +108,6 @@ body {
   }
 }
 
-/* 입력 영역 전체 */
 .input-area {
   display: flex;
   align-items: center;
@@ -116,56 +115,47 @@ body {
   border-top: 0.5px solid #666;
   gap: 12px;
   background: #151516;
+  flex-shrink: 0;
 }
 
-/* ⬇️ pill 모양의 wrapper */
 .input-wrap {
   flex: 1;
   background: #3a3a3d;
   border: 1px solid #555;
   border-radius: 999px;
-  padding: 12px 18px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
 }
 
-/* ⬇️ textarea는 배경 투명 + border 제거 */
 .chat-input {
-  width: 100%;
-  height: 20px; /* 높이 작아도 wrapper가 잡아줌 */
-  border: none;
-  background: transparent;
-  color: #fff;
+  flex: 1;
+  min-height: 36px;
+  max-height: 150px;
+  padding: 12px 16px;
+  border-radius: 24px;
   resize: none;
-  outline: none;
-  font-size: 15px;
-  font-family: inherit;
-  line-height: 20px;
-}
-
-/* placeholder */
-.chat-input::placeholder {
-  color: #bbbbbb;
-  opacity: 0.7;
-  font-size: 15px;
-}
-
-/* ⬇️ send 버튼: 보라색 동그라미 */
-.send-btn {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: #6828ff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #3a3a3d;
+  border: 1px solid #555;
   color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 15px;
+  overflow-y: auto;
 }
 
-.send-btn:hover {
-  background: #7d42ff;
+.chat-input::placeholder {
+  color: #bcbcbc;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+.input-area button {
+  width: 36px;
+  height: 36px;
+  background: #6828ff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }

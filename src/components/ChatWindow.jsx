@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { sendMessageToAPI } from "../api";
 import MessageBubble from "./MessageBubble";
+import { Play } from "lucide-react";
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const textareaRef = useRef(null);
+
+  const handleInput = (e) => {
+    setInput(e.target.value);
+
+    const el = textareaRef.current;
+    el.style.height = "auto"; // 초기화
+    el.style.height = `${el.scrollHeight}px`; // auto expand
+  };
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -14,9 +24,13 @@ export default function ChatWindow() {
     setMessages((prev) => [...prev, myMessage]);
     setInput("");
 
+    // textarea height 초기화
+    const el = textareaRef.current;
+    el.style.height = "44px";
+
     setIsTyping(true);
 
-    const response = await sendMessageToAPI(input);
+    const response = await sendMessageToAPI(myMessage.text);
 
     setIsTyping(false);
 
@@ -43,23 +57,22 @@ export default function ChatWindow() {
       </div>
 
       <div className="input-area">
-        <div className="input-wrap">
-          <textarea
-            className="chat-input"
-            placeholder="내용 입력하기..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-              }
-            }}
-          />
-        </div>
-
-        <button className="send-btn" onClick={sendMessage}>
-          전송
+        <textarea
+          ref={textareaRef}
+          className="chat-input"
+          placeholder="메시지를 입력하세요..."
+          value={input}
+          onChange={handleInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
+        />
+        <button onClick={sendMessage}>
+          {" "}
+          <Play size={20} />
         </button>
       </div>
     </>
