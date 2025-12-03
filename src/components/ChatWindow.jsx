@@ -32,22 +32,35 @@ export default function ChatWindow() {
         ))}
 
         {isTyping && (
-          <div className="typing-indicator">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div className="bubble bot typing-bubble">
+            <div className="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         )}
       </div>
 
       <div className="input-area">
-        <input
-          placeholder="메시지를 입력하세요..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-        />
-        <button onClick={sendMessage}>전송</button>
+        <div className="input-wrap">
+          <textarea
+            className="chat-input"
+            placeholder="내용 입력하기..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
+          />
+        </div>
+
+        <button className="send-btn" onClick={sendMessage}>
+          전송
+        </button>
       </div>
     </>
   );

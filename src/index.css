@@ -1,32 +1,31 @@
 body {
   margin: 0;
-  background: #f5f5f5;
+  background: #000;
   font-family: "Apple SD Gothic Neo", sans-serif;
 }
 
 .chat-page {
   display: flex;
   justify-content: center;
-  padding-top: 40px;
 }
 
 .chat-container {
-  width: 400px;
+  width: 480px;
   height: 600px;
-  background: #ffffff;
+  background: #151516;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
 }
 
 .chat-header {
   padding: 16px;
-  background: #1a1a1a;
+  background: #151516;
   color: white;
   font-size: 20px;
   font-weight: 600;
-  border-radius: 12px 12px 0 0;
+  border-bottom: 0.5px solid #666666;
+  position: sticky;
 }
 
 .messages-area {
@@ -38,6 +37,7 @@ body {
   gap: 12px;
 }
 
+/* 기본 버블 */
 .bubble {
   max-width: 75%;
   padding: 10px 14px;
@@ -45,56 +45,39 @@ body {
   font-size: 14px;
   line-height: 1.5;
   white-space: pre-line;
+  color: #fff;
 }
 
 .bubble.bot {
-  background: #ececec;
+  background: #212122;
   align-self: flex-start;
+  border-radius: 0px 24px 24px 24px;
 }
 
 .bubble.user {
-  background: #d0eaff;
+  background: #7c67ff;
   align-self: flex-end;
-}
-
-.input-area {
-  display: flex;
-  padding: 12px;
-  border-top: 1px solid #ddd;
-  gap: 8px;
-}
-
-.input-area input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-.input-area button {
-  padding: 10px 16px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 24px 0px 24px 24px;
 }
 
 .action {
   opacity: 0.45;
-  font-style: italic;
   margin-top: 4px;
   display: block;
 }
+
+.typing-bubble {
+  background: #3a3a3d;
+  padding: 10px 14px;
+  border-radius: 12px;
+  align-self: flex-start;
+  display: flex;
+  width: fit-content;
+}
+
 .typing-indicator {
   display: flex;
   gap: 4px;
-  padding: 10px 16px;
-  background: #e6e6e6;
-  border-radius: 12px;
-  width: fit-content;
-  margin: 8px 0;
 }
 
 .typing-indicator span {
@@ -103,6 +86,7 @@ body {
   background: #888;
   border-radius: 50%;
   animation: blink 1.4s infinite both;
+  opacity: 0.3;
 }
 
 .typing-indicator span:nth-child(2) {
@@ -114,12 +98,74 @@ body {
 
 @keyframes blink {
   0% {
-    opacity: 0.2;
+    opacity: 0.3;
   }
-  20% {
+  50% {
     opacity: 1;
   }
   100% {
-    opacity: 0.2;
+    opacity: 0.3;
   }
+}
+
+/* 입력 영역 전체 */
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-top: 0.5px solid #666;
+  gap: 12px;
+  background: #151516;
+}
+
+/* ⬇️ pill 모양의 wrapper */
+.input-wrap {
+  flex: 1;
+  background: #3a3a3d;
+  border: 1px solid #555;
+  border-radius: 999px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+}
+
+/* ⬇️ textarea는 배경 투명 + border 제거 */
+.chat-input {
+  width: 100%;
+  height: 20px; /* 높이 작아도 wrapper가 잡아줌 */
+  border: none;
+  background: transparent;
+  color: #fff;
+  resize: none;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  line-height: 20px;
+}
+
+/* placeholder */
+.chat-input::placeholder {
+  color: #bbbbbb;
+  opacity: 0.7;
+  font-size: 15px;
+}
+
+/* ⬇️ send 버튼: 보라색 동그라미 */
+.send-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #6828ff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.send-btn:hover {
+  background: #7d42ff;
 }
