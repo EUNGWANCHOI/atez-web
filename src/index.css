@@ -26,6 +26,10 @@ body {
   font-weight: 600;
   border-bottom: 0.5px solid #666666;
   position: sticky;
+
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 12px; /* 이미지와 텍스트 사이 간격 */
 }
 
 .messages-area {
@@ -158,4 +162,11 @@ body {
   border: none;
   border-radius: 50%;
   cursor: pointer;
+}
+
+img {
+  width: 45px;
+  height: 45px;
+  justify-content: flex-start;
+  border-radius: 50px;
 }
